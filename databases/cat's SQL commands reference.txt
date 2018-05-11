@@ -1,0 +1,5 @@
+Make new SQL using schema.sql:
+mysql -u student < server/schema.sql
+
+See existing SQL: 
+mysql -u student -p

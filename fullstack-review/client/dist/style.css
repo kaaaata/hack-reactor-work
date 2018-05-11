@@ -1,0 +1,12 @@
+.repo1 {
+	border-left: solid red;
+	border-width: 5px;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.repo2 {
+	border-left: solid green;
+	border-width: 5px;
+	padding: 5px;
+	margin-bottom: 5px;
+}

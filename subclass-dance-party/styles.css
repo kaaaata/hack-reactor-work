@@ -1,0 +1,55 @@
+/*https://daneden.github.io/animate.css/*/
+
+body, html{
+  height:100%;
+  background-image: url("http://moziru.com/images/tiles-clipart-dance-floor-7.jpg");
+  background-size: cover;
+}
+body{
+  margin: 0px;
+  background-color:#444;
+  font-size: 18px;
+}
+body, a:link, a:visited, a:active{
+  color: #483d8b;
+  text-decoration: none;
+}
+img{
+  position: absolute;
+  height: 100px;
+}
+.addDancerButton, .terminateButton{
+  padding:5px 12px;
+  float:right;
+}
+.topbar{
+  height:32px;
+  background-color: #708090;
+}
+.title{
+  background-color: #778899;
+}
+.dancer{
+  position:absolute;
+  transition: all 2s ease;
+}
+.eventButton, .partyButton, .endPartyButton{
+  padding:5px 12px;
+  float:left;
+}
+
+a.terminateButton{
+  color: darkred;
+}
+
+a.eventButton, a.partyButton, a.endPartyButton{
+  color: yellow;
+}
+
+.title {
+  padding:5px 12px;
+  float:right;
+  color: black;
+  font-family: "Comic Sans MS";
+  font-size: .87em;
+}

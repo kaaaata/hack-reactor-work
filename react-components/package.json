@@ -1,0 +1,19 @@
+{
+  "name": "hrsf87-react-components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaaaata/hrsf87-react-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaaaata/hrsf87-react-components/issues"
+  },
+  "homepage": "https://github.com/kaaaata/hrsf87-react-components#readme"
+}

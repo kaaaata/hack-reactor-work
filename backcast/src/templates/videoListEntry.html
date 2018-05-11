@@ -1,0 +1,9 @@
+<div class="video-list-entry media">
+  <div class="media-left">
+    <img class="media-object" src="<%- this.model.attributes.snippet.thumbnails.default.url %>" />
+  </div>
+  <div class="media-body">
+    <div class="video-list-entry-title"><%- this.model.get('snippet').title %></div>
+    <div class="video-list-entry-detail"><%- this.model.get('snippet').description %></div>
+  </div>
+</div>

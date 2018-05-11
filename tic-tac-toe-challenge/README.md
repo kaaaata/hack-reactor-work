@@ -1,0 +1,1 @@
+Tic-tac-toe in command line challenge in 1 hour. Instructions: copy and paste the code in tic-tac-toe.js into the Chrome console, with popups enabled, to play hotseat tic-tac-toe. 

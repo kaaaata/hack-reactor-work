@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Twittler</title>
+    <script src='jquery.js'></script>
+    <script src='data_generator.js'></script>
+    <div class='title'>
+      <h1>Twittler
+      <a href='https://en.wikipedia.org/wiki/The_Twits'>
+        <img src='https://i1.wp.com/secretldn.com/wp-content/uploads/2016/08/twits.jpg' alt='The Twits by Roald Dahl'>
+      </a></h1>
+    </div>
+    <h2 id='refresh'>Refresh</h2>
+    <h2 id='click_username'>Click a username to view their tweets</h2>
+    <br/>
+    <div class='usertweets'>
+    </div>
+  </head>
+
+  <style>
+  body {
+    background-color: SeaShell;
+  }
+  div.usertweets {
+    float: right;
+  }
+  div.title {
+    margin: auto;
+  }
+  h1 {
+    font-family: book antiqua;
+    font-size: 250%;
+    text-align: center;
+  }
+  h2 {
+    font-family: book antiqua;
+    font-size: 200%;
+    color: rgb(255,102,102);
+    display: inline;
+    border-color: rgb(255,102,102);
+    border-style: solid; 
+  }
+  #refresh {
+    cursor: pointer;
+  }
+  h2:hover {
+    box-shadow: 0 0 2px 1px rgba(180,120,10,0.5);
+  }
+  h3 {
+    font-family: book antiqua;
+    font-size: 150%;
+    float: right;
+  }
+  img {
+    border-radius: 20%;
+    width: 25%;
+    height: 25%;
+    float: right;
+  }
+  img:hover {
+    box-shadow: 0 0 2px 1px rgba(180,120,10,0.5);
+  }
+  div.line_break {
+    font-family: book antiqua;
+    font-size:60%;
+  }
+  div.user {
+    font-family: book antiqua;
+    font-weight: bold;
+    display: inline;
+    cursor: pointer;
+  }
+  div.user:hover {
+    box-shadow: 0 0 2px 1px rgba(180,120,10,0.5);
+  }
+  div.time {
+    font-family: book antiqua;
+    font-size: 60%;
+    padding-left: 1em;
+    display: inline;
+  }
+  div.tweet {
+    font-family: book antiqua;
+    margin-bottom: 10px;
+  }
+
+  </style>
+
+  <script>  
+    var $body = $('body'); //removed $body.html('');
+    var index;
+    var tweet_count = 0;
+    var user_list = [];
+    var tweet_time_list = [];
+    var tweet_list = [];
+    var index_list = [];
+    var side_user_list = [];
+    var side_tweet_time_list = [];
+    var side_tweet_list = [];
+    var side_index_list = [];
+
+    $(document).ready(function(){
+      //function to refresh tweets
+      var refresh_tweets = function(){
+        index = streams.home.length - 1;
+        while(index >= tweet_count){
+          var $tweet = $('<div class="tweet"></div>');
+          var tweet = streams.home[index];
+          var $user = $('<div class="user"></div>');
+          var user = tweet.user;
+          var $tweet_time = $('<div id="'+ index +'" class="time"></div>')
+          var tweet_time = tweet.created_at;
+          
+          tweet_list.push(tweet);
+          user_list.push(user);
+          tweet_time_list.push(tweet_time);
+          index_list.push(index);
+
+          $user.text('@' + user);
+          $tweet_time.text(new Date(tweet_time.getTime()).toLocaleString() + ' | ' + time_ago(tweet_time));
+          $tweet.text(tweet.message);
+
+          $user.appendTo($body);
+          $tweet_time.appendTo($body);
+          $tweet.appendTo($body);
+          
+          tweet_count++;
+          index--;
+        }
+        for (var i=0;i<index_list.length;i++) {
+          document.getElementById(index_list[i]).innerText = new Date(tweet_time_list[i].getTime()).toLocaleString() + ' | ' + time_ago(tweet_time_list[i]);
+        }
+        for (var i=0;i<side_index_list.length;i++) {
+          document.getElementById('side'+side_index_list[i]).innerText = new Date(side_tweet_time_list[i].getTime()).toLocaleString() + ' | ' + time_ago(side_tweet_time_list[i]);
+        }
+        var $line_break = $('<div class="line_break"></div>');
+        var line_break = '---';
+        $line_break.text(line_break);
+        $line_break.appendTo($body);
+      };
+
+      var time_ago = function(input_time){
+        var current_time = new Date();
+        var diff = current_time - input_time;
+        if (diff<1000) {
+          return '0 seconds ago'
+        } else if (diff<60000) {
+          return Math.floor(diff/1000) + ' seconds ago'
+        } else if (diff<3600000) {
+          return Math.floor(diff/60000) + ' minutes ago'
+        } else if (diff<86400000) {
+          return Math.floor(diff/3600000) + ' hours ago'
+        }
+        return Math.floor(diff/86400000) + ' days ago'
+      }; 
+
+      //get all the tweets of a user. and refresh all the timestamps
+      var get_user_tweets = function(username){
+        jQuery('.usertweets').html('');
+        side_user_list = [];
+        side_tweet_time_list = [];
+        side_tweet_list = [];
+        side_index_list = [];
+
+        for (var i=0;i<user_list.length;i++) {
+          if ('@'+user_list[i]===username) {
+            side_user_list.push(user_list[i]);
+            side_tweet_time_list.push(tweet_time_list[i]);
+            side_tweet_list.push(tweet_list[i]);
+            side_index_list.push(i);
+          }
+        }
+
+        side_index = side_user_list.length - 1;
+        while (side_index >= 0) {
+          var $tweet = $('<div class="tweet"></div>');
+          var tweet;
+          var $user = $('<div class="user"></div>');
+          var user;
+          var $tweet_time = $('<div id="side'+ side_index +'" class="time"></div>')
+          var tweet_time;
+          
+          $user.text('@' + side_user_list[side_index]);
+          $tweet_time.text(new Date(side_tweet_time_list[side_index].getTime()).toLocaleString() + ' | ' + time_ago(side_tweet_time_list[side_index]));
+          $tweet.text(side_tweet_list[side_index].message);
+
+          $user.appendTo('.usertweets');
+          $tweet_time.appendTo('.usertweets');
+          $tweet.appendTo('.usertweets');
+
+          side_index--;
+        }
+
+        for (var i=0;i<index_list.length;i++) {
+          document.getElementById(index_list[i]).innerText = new Date(tweet_time_list[i].getTime()).toLocaleString() + ' | ' + time_ago(tweet_time_list[i]);
+        }
+
+      };
+
+      //get initial tweets
+      refresh_tweets();
+
+      //id refresh becomes button to refresh tweets
+      $(document).on('click','#refresh',function(){
+        refresh_tweets();
+      });
+
+      //.user class becomes button to generate user tweets
+      $(document).on('click','.user',function(){
+        get_user_tweets($(this).text());
+      });
+
+    });
+    
+  </script>
+
+  <body>
+  <p></p>
+  </body>
+
+</html>
+

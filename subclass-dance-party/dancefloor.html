@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minion Dance Party</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="animate.css" />
+    <script src="lib/jquery.js"></script>
+    <script src="src/dancer.js"></script>
+    <script src="src/blinkyDancer.js"></script>
+    <script src="src/jelloDancer.js"></script>
+    <script src="src/wobbleDancer.js"></script>
+    <script src="src/jackInTheBoxDancer.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div id="container">
+      <div class="topbar">
+        <span class="title">Minion Dance Party</span>
+        <a href="#" class="addDancerButton" data-dancer-maker-function-name="BlinkyDancer">Fire up a Flash Dancer</a>
+        <a href="#" class="addDancerButton" data-dancer-maker-function-name="JelloDancer">Fire up a Jello Dancer</a>
+        <a href="#" class="addDancerButton" data-dancer-maker-function-name="WobbleDancer">Fire up a Wobble Dancer</a>
+        <a href="#" class="addDancerButton" data-dancer-maker-function-name="JackInTheBoxDancer">Fire up a Jack-In-The-Box Dancer</a>
+        <a href="#" class="terminateButton" >Send a Minion Home</a>
+        <a href="#" class="eventButton">Line 'em up!</a>   
+        <a href="#" class="partyButton">Party!!!</a>   
+        <a href="#" class="endPartyButton">Party Over...</a>  
+      </div>
+      <audio autoplay>
+        <source src="JustinBaby.mp3" type="audio/mp3">
+      </audio>
+    </div>
+    <script src="src/init.js"></script>
+  </body>
+</html>
